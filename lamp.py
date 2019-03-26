@@ -7,33 +7,47 @@ def showUI():
 
         cmds.deleteUI("mainWindow")
 
-    mW = cmds.window("mainWindow", title="LAMP", sizeable=True, widthHeight=(300, 400))
-    cmds.columnLayout(adj=True,nch=1)
+    mW = cmds.window("mainWindow", title="LAMP", sizeable=False, widthHeight=(300, 400), bgc=(0.6, 0.5, 0.3))
+    mainCL = cmds.columnLayout(adj=True)
 
     logoP = cmds.internalVar(usd=True) + "/lamp_sources/banner/logolamp_03.jpg"
     cmds.image(width=300, height=110, image=logoP)
 
     cmds.text("IMPORT")
 
-    cmds.button("Mercury", command=B5)
-
+    mainRL = cmds.rowLayout(numberOfColumns=2)
+    cmds.button("Mercury", bgc=(0.3, 0.3, 0.3), command=B5)
+    cmds.textField(bgc=(0.6, 0.5, 0.3))
+    cmds.setParent(mainCL)
+    cmds.columnLayout(columnOffset=('left', 10))
     cmds.text("ENVIRONMENT")
 
-    cmds.separator()
 
-    b1 = cmds.button("Test Setup", command=B1)
+    cmds.rowLayout(numberOfColumns=3)
+    b1 = cmds.button("Test Setup",bgc=(0.3, 0.3, 0.3), command=B1)
     b1point2 = cmds.button("User Environment")
     b1point3 = cmds.button("Simply")
+    cmds.setParent(mainCL)
 
+    cmds.columnLayout()
     cmds.text("Arnold   LIGHTS")
-    b2 = cmds.button("Sunset", command=B2)
-    b2point1 = cmds.button("Cold", command=B3)
 
+    cmds.rowLayout(numberOfColumns=2)
+    b2 = cmds.button("Sunset", bgc=(0.3, 0.3, 0.3), command=B2)
+    b2point1 = cmds.button("Cold", bgc=(0.3, 0.3, 0.3), command=B3)
+    cmds.setParent(mainCL)
+
+    cmds.columnLayout()
     cmds.text("Arnold MATERIALS")
+
+    cmds.rowLayout(numberOfColumns=2)
     b3point1 = cmds.button("Wood")
     b3point2 = cmds.button("Wax")
+    cmds.setParent(mainCL)
 
-    b4 = cmds.button("Clean", command=B4)
+    cmds.separator(height=10,style="in")
+    cmds.columnLayout()
+    b4 = cmds.button("Clean", bgc=(0.3, 0.3, 0.3), command=B4)
 
     cmds.showWindow("mainWindow")
 
