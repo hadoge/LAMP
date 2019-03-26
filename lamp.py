@@ -35,7 +35,7 @@ def showUI():
     cmds.separator(height=10, style="in")
 
     cmds.columnLayout()
-    cmds.text("Arnold   LIGHTS")
+    cmds.text("Arnold Lights")
 
     cmds.rowLayout(numberOfColumns=2)
     b2 = cmds.button("Sunset", bgc=(0.3, 0.3, 0.3), command=B2)
@@ -43,7 +43,7 @@ def showUI():
     cmds.setParent(mainCL)
 
     cmds.columnLayout()
-    cmds.text("Arnold MATERIALS")
+    cmds.text("Arnold Materials")
 
     cmds.rowLayout(numberOfColumns=2)
     b3point1 = cmds.button("Wood")
@@ -69,11 +69,40 @@ def saveUI():
     saveCL = cmds.columnLayout()
     cmds.text("Would you like to create a new slot\nor overwrite an existing one?")
     cmds.rowLayout(numberOfColumns=2)
-    cmds.button("New")
-    cmds.button("Overwrite")
+    cmds.button("New", command=A1)
+    cmds.button("Overwrite", command=A2)
     cmds.setParent(saveCL)
     cmds.showWindow("firstW")
 
+def newUI_01():
+
+    if cmds.window("slotTypeQ", exists=True):
+
+        cmds.deleteUI("slotTypeQ")
+
+    cmds.deleteUI("firstW")
+    cmds.window("slotTypeQ", title="LAMP", sizeable=False, width=300, height=75, bgc=(0.6, 0.5, 0.3))
+    slotCL = cmds.columnLayout()
+    cmds.text("Select slot type")
+    cmds.separator(height=20, style="shelf")
+    cmds.rowLayout(numberOfColumns=3)
+    cmds.button("Environment slot", bgc=(0.3, 0.3, 0.3), command=B4)
+    cmds.button("Light slot", bgc=(0.3, 0.3, 0.3), command=B4)
+    cmds.button("Material slot", bgc=(0.3, 0.3, 0.3), command=B4)
+    cmds.setParent(slotCL)
+    cmds.showWindow("slotTypeQ")
+
+    pass
+
+def newUI_02():
+
+
+    pass
+
+def newUI_03():
+
+
+    pass
 
 def B1(*args):
 
@@ -125,6 +154,7 @@ def B4(*args):
     if s != []:
 
         cmds.delete() # DELETE selected objects if LIST is not EMPTY
+
 def B5(*args):
 
     mercuryPath = cmds.internalVar(usd=True) + "/lamp_sources/models/mercury.obj"
@@ -133,5 +163,13 @@ def B5(*args):
 def B6(*args):
 
     saveUI()
+
+def A1(*args):
+
+    newUI_01()
+
+def A2(*args):
+
+    pass
 
 showUI()
