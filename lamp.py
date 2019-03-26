@@ -19,7 +19,10 @@ def showUI():
     cmds.button("Mercury", bgc=(0.3, 0.3, 0.3), command=B5)
     cmds.textField(bgc=(0.6, 0.5, 0.3))
     cmds.setParent(mainCL)
-    cmds.columnLayout(columnOffset=('left', 10))
+
+    cmds.separator(height=10, style="in")
+
+    cmds.columnLayout(adj=True)
     cmds.text("ENVIRONMENT")
 
 
@@ -28,6 +31,8 @@ def showUI():
     b1point2 = cmds.button("User Environment")
     b1point3 = cmds.button("Simply")
     cmds.setParent(mainCL)
+
+    cmds.separator(height=10, style="in")
 
     cmds.columnLayout()
     cmds.text("Arnold   LIGHTS")
@@ -46,10 +51,28 @@ def showUI():
     cmds.setParent(mainCL)
 
     cmds.separator(height=10,style="in")
-    cmds.columnLayout()
-    b4 = cmds.button("Clean", bgc=(0.3, 0.3, 0.3), command=B4)
+    cmds.rowLayout(numberOfColumns=2)
+    b4 = cmds.button("Clear", bgc=(0.3, 0.3, 0.3), command=B4)
+    b4point1 = cmds.button("Save", bgc=(0.3, 0.3, 0.3), command=B6)
+    cmds.setParent(mainCL)
 
     cmds.showWindow("mainWindow")
+
+def saveUI():
+
+    if cmds.window("firstW", exists=True):
+
+        cmds.deleteUI("firstW")
+
+    cmds.deleteUI("mainWindow")
+    nS = cmds.window("firstW",title="LAMP", sizeable=False, widthHeight=(200, 100), bgc=(0.6, 0.5, 0.3))
+    saveCL = cmds.columnLayout()
+    cmds.text("Would you like to create a new slot\nor overwrite an existing one?")
+    cmds.rowLayout(numberOfColumns=2)
+    cmds.button("New")
+    cmds.button("Overwrite")
+    cmds.setParent(saveCL)
+    cmds.showWindow("firstW")
 
 
 def B1(*args):
@@ -106,5 +129,9 @@ def B5(*args):
 
     mercuryPath = cmds.internalVar(usd=True) + "/lamp_sources/models/mercury.obj"
     cmds.file(mercuryPath, i=True)
+
+def B6(*args):
+
+    saveUI()
 
 showUI()
