@@ -7,7 +7,7 @@ def showUI():
 
         cmds.deleteUI("mainWindow")
 
-    mW = cmds.window("mainWindow", title="LAMP", sizeable=False, widthHeight=(300, 400), bgc=(0.6, 0.5, 0.3))
+    mW = cmds.window("mainWindow", title="LAMP v1.0", sizeable=False, widthHeight=(300, 400), bgc=(0.6, 0.5, 0.3))
     mainCL = cmds.columnLayout(adj=True)
 
     logoP = cmds.internalVar(usd=True) + "/lamp_sources/banner/logolamp_03.jpg"
@@ -110,7 +110,9 @@ def B1(*args):
 
     ball = cmds.polySphere(name="Sphere", radius=75, sa=8, sh=8 )
     bG = cmds.polyPlane(name="Plane", width=800, height=600, sh=6, sw=1)
-    mC = cmds.camera(name="RenderCam", position=[-55.950, 137.560, 284.860], rotation=[-12, -12, 0])
+    mC = cmds.camera(name="rc", position=[-55.950, 137.560, 284.860], rotation=[-12, -12, 0])
+    cmds.select("rc1", r=True)
+    cmds.rename("RenderCam")
 
     cmds.move(0, 100, 0,("Sphere"))
     cmds.move(0, 0, -75, ("Plane"))
@@ -118,7 +120,7 @@ def B1(*args):
     # Select AllDagObjects minus Original Sphere and Plane
 
     cmds.select(allDagObjects=True)
-    cmds.select("RenderCam1", deselect=True)
+    cmds.select("RenderCam", deselect=True)
     cmds.select("Sphere", deselect=True)
     cmds.select("Plane", deselect=True)
 
@@ -145,7 +147,9 @@ def B3(*args):
 
     # cmds.shadingNode("areaLight", name="ColdLight01", asLight=True)
     # cmds.shadingNode("areaLight", name="ColdLight02", asLight=True)
-    mtoa.utils.createLocator("aiAreaLight", asLight=True)
+    light1 = mtoa.utils.createLocator("aiAreaLight", asLight=True)
+    cmds.select("aiAreaLight1", r=True)
+    cmds.rename("ColdLight01")
 
 def B4(*args):
 
